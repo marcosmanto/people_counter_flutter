@@ -20,29 +20,86 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  static const double maxSize = 265;
+
+  void decrement() {}
+  void increment() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Card(
-            color: Colors.white54,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Pode entrar!',
-                    style: TextStyle(fontSize: 30),
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                color: Colors.white54,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: maxSize,
+                  height: maxSize,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Pode entrar!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      Text('0', style: TextStyle(fontSize: 100))
+                    ],
                   ),
-                  Text('0', style: TextStyle(fontSize: 100))
-                ],
+                ),
               ),
-            ),
+              Container(
+                width: maxSize,
+                margin: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        fixedSize: const Size(120, 100),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                      onPressed: decrement,
+                      child: Text(
+                        'Saiu',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        fixedSize: const Size(120, 100),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                      onPressed: increment,
+                      child: Text(
+                        'Entrou',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Row(),
         ],
       ),
     );
