@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
@@ -21,6 +22,7 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static const double maxSize = 265;
+  static const whiteColor = Color.fromARGB(206, 255, 255, 255);
 
   void decrement() {}
   void increment() {}
@@ -28,79 +30,87 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage('assets/images/ice-cream-contrast.png'),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  color: whiteColor,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: maxSize,
+                    height: maxSize,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Pode entrar!',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        Text('0', style: TextStyle(fontSize: 100))
+                      ],
+                    ),
+                  ),
                 ),
-                color: Colors.white54,
-                child: Container(
-                  alignment: Alignment.center,
+                Container(
                   width: maxSize,
-                  height: maxSize,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  margin: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Pode entrar!',
-                        style: TextStyle(fontSize: 30),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: whiteColor,
+                          fixedSize: const Size(120, 100),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ),
+                        onPressed: decrement,
+                        child: Text(
+                          'Saiu',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                      Text('0', style: TextStyle(fontSize: 100))
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: whiteColor,
+                          fixedSize: const Size(120, 100),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ),
+                        onPressed: increment,
+                        child: Text(
+                          'Entrou',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-              Container(
-                width: maxSize,
-                margin: const EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        fixedSize: const Size(120, 100),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
-                      onPressed: decrement,
-                      child: Text(
-                        'Saiu',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        fixedSize: const Size(120, 100),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
-                      onPressed: increment,
-                      child: Text(
-                        'Entrou',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
