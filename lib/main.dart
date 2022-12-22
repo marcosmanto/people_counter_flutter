@@ -184,8 +184,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 var buttonColors = WindowButtonColors(
-  mouseOver: Color(0xFF0F829D),
-  mouseDown: Color(0xFFDE318D),
+  mouseOver: const Color(0xFF0F829D),
+  mouseDown: const Color(0xFFDE318D),
 );
 
 class WindowButtons extends StatelessWidget {
