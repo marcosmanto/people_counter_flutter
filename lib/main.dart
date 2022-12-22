@@ -18,14 +18,26 @@ class MyApp extends StatelessWidget {
 }
 
 // Widget that represents a page in this case the home
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   static const double maxSize = 265;
   static const whiteColor = Color.fromARGB(206, 255, 255, 255);
 
-  void decrement() {}
-  void increment() {}
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
+  void decrement() {
+    setState(() => count--);
+  }
+
+  void increment() {
+    setState(() => count++);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +59,11 @@ class HomePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  color: whiteColor,
+                  color: Color.fromARGB(170, 181, 249, 249),
                   child: Container(
                     alignment: Alignment.center,
-                    width: maxSize,
-                    height: maxSize,
+                    width: HomePage.maxSize,
+                    height: HomePage.maxSize,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -59,20 +71,20 @@ class HomePage extends StatelessWidget {
                           'Pode entrar!',
                           style: TextStyle(fontSize: 30),
                         ),
-                        Text('0', style: TextStyle(fontSize: 100))
+                        Text(count.toString(), style: TextStyle(fontSize: 100))
                       ],
                     ),
                   ),
                 ),
                 Container(
-                  width: maxSize,
+                  width: HomePage.maxSize,
                   margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: whiteColor,
+                          backgroundColor: HomePage.whiteColor,
                           fixedSize: const Size(120, 100),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
@@ -89,7 +101,7 @@ class HomePage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: whiteColor,
+                          backgroundColor: HomePage.whiteColor,
                           fixedSize: const Size(120, 100),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
