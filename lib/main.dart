@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   static const double maxSize = 265;
-  static const whiteColor = Color.fromARGB(206, 255, 255, 255);
+  static const whiteColor = Color.fromARGB(127, 255, 255, 255);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -39,11 +39,15 @@ class _HomePageState extends State<HomePage> {
     setState(() => count++);
   }
 
+  bool get isEmpty => count == 0;
+  bool get isFull => count == 20;
+  Color get cardTextColor => isFull ? Colors.white : Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fill,
             image: AssetImage('assets/images/ice-cream-contrast.png'),
@@ -59,7 +63,10 @@ class _HomePageState extends State<HomePage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  color: Color.fromARGB(170, 181, 249, 249),
+                  shadowColor: Colors.transparent,
+                  color: isFull
+                      ? const Color.fromARGB(170, 244, 67, 54)
+                      : HomePage.whiteColor,
                   child: Container(
                     alignment: Alignment.center,
                     width: HomePage.maxSize,
@@ -68,10 +75,12 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Pode entrar!',
-                          style: TextStyle(fontSize: 30),
+                          isFull ? 'Lotado' : 'Pode entrar!',
+                          style: TextStyle(fontSize: 30, color: cardTextColor),
                         ),
-                        Text(count.toString(), style: TextStyle(fontSize: 100))
+                        Text(count.toString(),
+                            style:
+                                TextStyle(fontSize: 100, color: cardTextColor))
                       ],
                     ),
                   ),
@@ -85,13 +94,14 @@ class _HomePageState extends State<HomePage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: HomePage.whiteColor,
+                          shadowColor: Colors.transparent,
                           fixedSize: const Size(120, 100),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
                           ),
                         ),
-                        onPressed: decrement,
-                        child: Text(
+                        onPressed: isEmpty ? null : decrement,
+                        child: const Text(
                           'Saiu',
                           style: TextStyle(
                             fontSize: 24,
@@ -102,13 +112,14 @@ class _HomePageState extends State<HomePage> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: HomePage.whiteColor,
+                          shadowColor: Colors.transparent,
                           fixedSize: const Size(120, 100),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
                           ),
                         ),
-                        onPressed: increment,
-                        child: Text(
+                        onPressed: isFull ? null : increment,
+                        child: const Text(
                           'Entrou',
                           style: TextStyle(
                             fontSize: 24,
